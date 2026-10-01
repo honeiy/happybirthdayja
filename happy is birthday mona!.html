@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For Ja ♡</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Kalam:wght@300;400;700&family=Pacifico&display=swap');
+
+:root {
+    --pink: #f6a9bc;
+    --light-pink: #fff0f3;
+    --cream: #fffaf0;
+    --purple: #c9b6e4;
+    --dark: #55445c;
+    --yellow: #ffe6a7;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    background: var(--cream);
+    color: var(--dark);
+    font-family: 'DM Sans', sans-serif;
+    overflow-x: hidden;
+}
+
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    opacity: .25;
+    background-image: radial-gradient(#d8a9b8 0.7px, transparent 0.7px);
+    background-size: 18px 18px;
+}
+
+/* OPENING SCREEN */
+
+.intro {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 25px;
+    text-align: center;
+}
+
+.intro-content {
+    max-width: 500px;
+    animation: appear 1s ease;
+}
+
+.small-note {
+    font-family: 'Kalam', cursive;
+    font-size: 18px;
+    color: #a17c9c;
+    transform: rotate(-3deg);
+}
+
+h1 {
+    font-family: 'Pacifico', cursive;
+    color: #d77f9c;
+    font-size: clamp(38px, 8vw, 65px);
+    font-weight: normal;
+    margin: 12px 0;
+}
+
+.envelope {
+    position: relative;
+    width: 220px;
+    height: 150px;
+    margin: 45px auto;
+    background: #f4b8c8;
+    border-radius: 8px;
+    cursor: pointer;
+    box-shadow: 0 15px 30px #dca4b566;
+    transition: transform .3s;
+}
+
+.envelope:hover {
+    transform: translateY(-8px) rotate(-2deg);
+}
+
+.envelope::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    border-left: 110px solid transparent;
+    border-right: 110px solid transparent;
+    border-top: 90px solid #e99bb1;
+    transform-origin: top;
+    transition: transform .5s;
+    z-index: 2;
+}
+
+.envelope.open::before {
+    transform: rotateX(180deg);
+}
+
+.envelope::after {
+    content: "♡";
+    position: absolute;
+    top: 52px;
+    left: 92px;
+    font-size: 35px;
+    color: white;
+    z-index: 3;
+}
+
+.envelope-label {
+    position: absolute;
+    bottom: 12px;
+    width: 100%;
+    font-family: 'Kalam', cursive;
+    font-size: 17px;
+    color: #985e76;
+}
+
+.open-btn {
+    border: none;
+    background: #d88da8;
+    color: white;
+    padding: 14px 30px;
+    border-radius: 30px;
+    font-size: 16px;
+    cursor: pointer;
+    font-family: 'DM Sans', sans-serif;
+    box-shadow: 0 5px 15px #d88da855;
+    transition: .3s;
+}
+
+.open-btn:hover {
+    transform: scale(1.06);
+    background: #c77998;
+}
+
+.hint {
+    font-size: 13px;
+    color: #a58b9f;
+    margin-top: 18px;
+}
+
+/* LETTER */
+
+.letter-section {
+    display: none;
+    padding: 50px 18px 80px;
+    animation: appear 1s ease;
+}
+
+.paper {
+    max-width: 760px;
+    margin: auto;
+    padding: clamp(25px, 6vw, 65px);
+    background: #fffdf8;
+    border: 1px solid #f0dce0;
+    border-radius: 5px;
+    box-shadow: 8px 10px 0 #e8cbd4, 0 20px 50px #a17c9c22;
+    position: relative;
+}
+
+.paper::before {
+    content: "✿";
+    position: absolute;
+    top: 15px;
+    right: 22px;
+    font-size: 30px;
+    color: #e9a9bd;
+}
+
+.letter-heading {
+    text-align: center;
+    font-family: 'Pacifico', cursive;
+    font-weight: normal;
+    color: #d77f9c;
+    font-size: 35px;
+    margin-bottom: 35px;
+}
+
+.letter-text {
+    font-family: 'Kalam', cursive;
+    font-size: 18px;
+    line-height: 2;
+    white-space: pre-wrap;
+    overflow-wrap: break-word;
+    color: #66536a;
+}
+
+.signature {
+    text-align: center;
+    font-family: 'Pacifico', cursive;
+    color: #d77f9c;
+    font-size: 25px;
+    margin-top: 45px;
+}
+
+/* FINAL SURPRISE */
+
+.final-surprise {
+    display: none;
+    text-align: center;
+    max-width: 650px;
+    margin: 60px auto 0;
+    padding: 30px;
+    animation: appear 1s ease;
+}
+
+.final-surprise h2 {
+    font-family: 'Pacifico', cursive;
+    color: #d77f9c;
+    font-size: 35px;
+    font-weight: normal;
+}
+
+.final-surprise p {
+    font-family: 'Kalam', cursive;
+    font-size: 21px;
+    line-height: 1.8;
+}
+
+.gift {
+    font-size: 65px;
+    cursor: pointer;
+    display: inline-block;
+    transition: transform .3s;
+}
+
+.gift:hover {
+    transform: rotate(12deg) scale(1.15);
+}
+
+.gift-message {
+    display: none;
+    color: #b46d91;
+    font-family: 'Kalam', cursive;
+    font-size: 20px;
+    margin-top: 20px;
+}
+
+/* FLOATING DECORATIONS */
+
+.float {
+    position: fixed;
+    bottom: -50px;
+    pointer-events: none;
+    animation: floatUp linear forwards;
+    z-index: 10;
+}
+
+@keyframes floatUp {
+    to {
+        transform: translateY(-110vh) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+@keyframes appear {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media(max-width: 600px) {
+    .letter-text {
+        font-size: 16px;
+        line-height: 1.9;
+    }
+
+    .paper {
+        padding: 35px 23px;
+    }
+
+    .letter-heading {
+        font-size: 29px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- OPENING -->
+
+<section class="intro" id="intro">
+    <div class="intro-content">
+        <div class="small-note">a little something made with love ♡</div>
+
+        <h1>For Ja!</h1>
+
+        <p>One little surprise for the birthday girl.</p>
+
+        <div class="envelope" id="envelope" onclick="openLetter()">
+            <div class="envelope-label">To: Ja ♡</div>
+        </div>
+
+        <button class="open-btn" onclick="openLetter()">
+            Open your letter ♡
+        </button>
+
+        <div class="hint">P.S. Don't forget to smile!</div>
+    </div>
+</section>
+
+<!-- LETTER -->
+
+<section class="letter-section" id="letter">
+    <div class="paper">
+        <div class="letter-heading">A letter for you ♡</div>
+
+        <div class="letter-text">helluuu jaaaaa. happiest 18th birthdayyyyyyyyy! 18 kana at wla kanang magagawa. thankyou, thankyou always for being my rant buddy, masandalan and the one i could randomly talk to about literally anything. i hope you know how talented you are, dont be fed up to much by what you temporarily feel kasi that doesn't define you. where ever life brings you, i hope you find happiness and peace (although mukhang mahirap yan hanapin sa course na pinasok mo😭) but still, make time. make time for the things you like to do. do arts, edit, pubmats, drawing, photography, write, read and moreee. college maybe exhausting, yes. pero that is college tlga and the only thing you can do to at least make yourself feel better is do the things that you like even though you feel like you dont deserve it. buy, gumatos ka and all for as long as it can make you feel better. dimo man ma pursue and dream course mo but i hope that you will always make time for multimedia, for arts. if there is one thing that i would like you to see ngayon, that would be how i see you. i don't know pero there is a lot of talent sayo. the way you think, the way you think creatively. the way you see things. the things that YOU CAN DO pero diko magawa. and somehow, that is something i admire about you, like a lot, legit. sana makita mo that you have a lot to give, you have the talent and i hope makita yun ng parents mo (really, like how can they be so blind💔) kahit gaano ka e humble ng college, always keep in mind that you could always try again. wag madaliin ang buhay, darating kadin dun ja, maging successful karin. i have a lot to say but no words can describe how much i am grateful to have you. thankyou for always understanding kahit na patanga tanga nako HAHAHAHAHA. do what makes you happyy, lipat ka davao? gooo! dito lang ako, always supportive sa lahatt. call me or text me if you need anything or what. HAPPY BIRTHDAY JAAAAA ILUVU UWU MWHEUEHHEHEU</div>
+
+        <div class="signature">with love, always ♡</div>
+    </div>
+
+    <!-- FINAL SURPRISE -->
+
+    <div class="final-surprise" id="finalSurprise">
+        <h2>Wait, there's more! ♡</h2>
+
+        <p>
+            Because one letter isn't enough to celebrate someone
+            as special as you.
+        </p>
+
+        <div class="gift" onclick="revealGift()">🎁</div>
+
+        <div class="gift-message" id="giftMessage">
+            Happy 18th birthday, Ja! ♡
+            <br><br>
+            Keep creating. Keep dreaming. Keep being you.
+            <br>
+            The world deserves to see what you can make.
+            <br><br>
+            P.S. You're stuck with me forever. HAHAHAHA.
+        </div>
+    </div>
+</section>
+
+<script>
+function openLetter() {
+    document.getElementById('intro').style.display = 'none';
+    document.getElementById('letter').style.display = 'block';
+
+    window.scrollTo(0, 0);
+
+    createCelebration();
+
+    // Reveal the final surprise after the letter has had time to be read.
+    setTimeout(() => {
+        document.getElementById('finalSurprise').style.display = 'block';
+    }, 12000);
+}
+
+function revealGift() {
+    document.getElementById('giftMessage').style.display = 'block';
+    createCelebration();
+}
+
+function createCelebration() {
+    const decorations = ['♡', '✿', '✧', '✨', '🌸', '💗', '🎨'];
+
+    for (let i = 0; i < 45; i++) {
+        setTimeout(() => {
+            const item = document.createElement('div');
+            item.className = 'float';
+            item.innerHTML = decorations[
+                Math.floor(Math.random() * decorations.length)
+            ];
+
+            item.style.left = Math.random() * 100 + 'vw';
+            item.style.fontSize = (15 + Math.random() * 25) + 'px';
+            item.style.animationDuration = (4 + Math.random() * 5) + 's';
+
+            document.body.appendChild(item);
+
+            setTimeout(() => item.remove(), 9000);
+        }, i * 100);
+    }
+}
+
+// Little floating decorations in the background.
+setInterval(() => {
+    if (document.getElementById('intro').style.display !== 'none') {
+        const item = document.createElement('div');
+        item.className = 'float';
+        item.innerHTML = ['♡', '✧', '✿'][
+            Math.floor(Math.random() * 3)
+        ];
+
+        item.style.left = Math.random() * 100 + 'vw';
+        item.style.fontSize = '20px';
+        item.style.animationDuration = '8s';
+
+        document.body.appendChild(item);
+
+        setTimeout(() => item.remove(), 8000);
+    }
+}, 1200);
+</script>
+
+</body>
+</html>
